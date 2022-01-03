@@ -3,6 +3,8 @@ prospects = pd.read_csv("/Users/ukelly/Desktop/UCDPA_una/Prospects_January_2022.
 print(prospects.head())
 print(prospects.info())
 
+prospects["First Name"] = prospects["First Name"].str.capitalize()
+prospects["Last Name"] = prospects["Last Name"].str.capitalize()
 prospects["Full Name"] = prospects["First Name"] + " " + prospects["Last Name"]
 
 dup_prospects = prospects.sort_values("Score", ascending=False)
@@ -32,4 +34,9 @@ unq_with_hot_prospects = pd.merge(unq_prospects, hot_prospects, on=["Prospect Id
 unq_with_hot_prospects["Last Activity Date"] = pd.to_datetime((unq_with_hot_prospects["Last Activity Date"]))
 unq_with_hot_prospects["Created Date"] = pd.to_datetime((unq_with_hot_prospects["Created Date"]))
 
+unq_with_hot_prospects.reset_index()
+
 print(unq_with_hot_prospects.info())
+
+
+
