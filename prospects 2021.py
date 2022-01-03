@@ -21,3 +21,6 @@ ordered_prospects["Grade"].fillna("D", inplace=True)
 ordered_prospects.isna().sum().plot(kind="bar", rot = 45, title = "Updated Columns with Missing Values")
 plt.show()
 plt.clf()
+
+ordered_prospects["Full Name"] = ordered_prospects["First Name"] + " " + ordered_prospects["Last Name"]
+print(ordered_prospects)
