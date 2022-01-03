@@ -3,14 +3,21 @@ prospects = pd.read_csv("/Users/ukelly/Desktop/UCDPA_una/Prospects_January_2022.
 print(prospects.head())
 print(prospects.info())
 
-prospects.sort_values("Score", ascending=False)
+ordered_prospects = prospects.sort_values("Score", ascending=False)
 
-print(prospects["Email"].value_counts())
-print(prospects.isna().any())
+print(ordered_prospects["Email"].value_counts(sort=True))
 
-prospects.drop_duplicates(subset="Email")
+ordered_prospects.drop_duplicates(subset="Email")
+
+print(ordered_prospects.isna().any())
 
 import matplotlib.pyplot as plt
-prospects.isna().sum().plot(kind="bar", rot = 45, title = "Columns with Missing Values")
+ordered_prospects.isna().sum().plot(kind="bar", rot = 45, title = "Columns with Missing Values")
+plt.show()
+plt.clf()
+
+ordered_prospects["Grade"].fillna("D", inplace=True)
+
+ordered_prospects.isna().sum().plot(kind="bar", rot = 45, title = "Updated Columns with Missing Values")
 plt.show()
 plt.clf()
