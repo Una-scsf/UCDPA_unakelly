@@ -38,5 +38,7 @@ unq_with_hot_prospects.reset_index()
 
 print(unq_with_hot_prospects.info())
 
-
+unq_with_hot_prospects["Grade"].hist()
+plt.show()
+plt.clf()
 
