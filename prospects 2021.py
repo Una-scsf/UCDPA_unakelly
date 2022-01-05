@@ -37,3 +37,20 @@ unq_with_hot_prospects.reset_index()
 
 print(unq_with_hot_prospects.info())
 
+fig, ax = plt.subplots()
+ax.hist(unq_with_hot_prospects["Lifecycle Stage"], bins=6)
+ax.set_xlabel("Lifecycle Stage")
+ax.set_ylabel("# of customers")
+plt.show()
+
+fig, ax = plt.subplots()
+ax.hist(unq_with_hot_prospects["Grade"])
+ax.set_xlabel("Customer grade")
+ax.set_ylabel("# of customers")
+plt.show()
+
+fig, ax = plt.subplots()
+ax.hist(unq_with_hot_prospects["Score"], bins=[100,200,300,400,500,600,700,800,900,1000])
+ax.set_xlabel("Engagement score")
+ax.set_ylabel("# of customers")
+plt.show()
