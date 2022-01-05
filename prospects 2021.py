@@ -1,6 +1,5 @@
 import pandas as pd
 prospects = pd.read_csv("/Users/ukelly/Desktop/UCDPA_unakelly/Prospects_January_2022.csv")
-print(prospects.head())
 print(prospects.info())
 
 prospects["Last Activity Date"] = pd.to_datetime((prospects["Last Activity Date"]))
@@ -10,8 +9,7 @@ prospects["Last Name"] = prospects["Last Name"].str.capitalize()
 prospects["Full Name"] = prospects["First Name"] + " " + prospects["Last Name"]
 
 dup_prospects = prospects.sort_values("Score", ascending=False)
-
-print(dup_prospects["Email"].value_counts(sort=True))
+dup_prospects["Email"].value_counts(sort=True)
 
 unq_prospects = dup_prospects.drop_duplicates(subset="Email")
 
@@ -35,8 +33,16 @@ hot_prospects = pd.read_csv("/Users/ukelly/Desktop/UCDPA_unakelly/Hot_Prospects_
 unq_with_hot_prospects = pd.merge(unq_prospects, hot_prospects, on=["Prospect Id", "Email"], how="outer")
 
 unq_with_hot_prospects.reset_index()
-
 print(unq_with_hot_prospects.info())
+
+
+import numpy as np
+print(unq_with_hot_prospects["Score"].agg([np.median, np.mean, np.max, np.min]))
+
+score_by_campaign = unq_with_hot_prospects.groupby("Campaign")["Score"].agg([np.median, np.mean, np.max, np.min])
+print(score_by_campaign)
+
+
 
 fig, ax = plt.subplots()
 ax.hist(unq_with_hot_prospects["Lifecycle Stage"], bins=6, color="green", edgecolor="black")
