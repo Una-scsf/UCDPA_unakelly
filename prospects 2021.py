@@ -90,7 +90,6 @@ world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
 world.columns=['pop_est', 'continent', 'country', 'code', 'gdp_md_est', 'geometry']
 
 merged_df = pd.merge(world, avg_score_by_country, on=["code", "country"])
-print(merged_df.info())
 
 merged_df.plot(column="average score",  cmap = "BuGn", edgecolor = 'black', legend=True)
 plt.xticks([])
