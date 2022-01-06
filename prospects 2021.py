@@ -1,5 +1,5 @@
 import pandas as pd
-prospects = pd.read_csv("/Users/ukelly/Desktop/UCDPA_unakelly/Prospects_January_2022.csv")
+prospects = pd.read_csv("/Users/ukelly/Desktop/UCDPA_unakelly/Prospects_January_2021.csv")
 print(prospects.info())
 
 prospects["Last Activity Date"] = pd.to_datetime((prospects["Last Activity Date"]))
@@ -19,13 +19,11 @@ import matplotlib.pyplot as plt
 
 unq_prospects.isna().sum().plot(kind="bar", rot = 45, title = "Columns with Missing Values")
 plt.show()
-plt.clf()
 
 unq_prospects["Grade"].fillna("D", inplace=True)
 
 unq_prospects.isna().sum().plot(kind="bar", rot = 45, title = "Updated Columns with Missing Values")
 plt.show()
-plt.clf()
 
 print(unq_prospects)
 
