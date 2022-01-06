@@ -1,3 +1,4 @@
+import geopandas
 import pandas as pd
 prospects = pd.read_csv("/Users/ukelly/Desktop/UCDPA_unakelly/Prospects_January_2021.csv")
 print(prospects.info())
@@ -71,4 +72,28 @@ ax.hist(unq_with_hot_prospects["Lifecycle Stage"], bins=6, color="green", edgeco
 ax.set_xlabel("Lifecycle Stage")
 ax.set_ylabel("# of customers")
 ax.set_title("Lifecycle stage of customers")
+plt.show()
+
+score_by_country = unq_with_hot_prospects.groupby("Country")["Score"].agg(np.mean)
+print(score_by_country)
+
+customer_countries = ["Australia", "Austria", "Belgium", "Canada", "France", "Germany", "Greece", "Ireland", "Italy", "Japan", "New Zealand","Norway", "Spain", "Sweden","United Kingdom", "United States"]
+country_codes = ['AUS', 'AUT', 'BEL', 'CAN', 'FRA', 'DEU', 'GRC', 'IRL', 'ITA', 'JPN', 'NZL', 'NOR', 'ESP', 'SWE', 'GBR', 'USA']
+avg_score = ["199", "191", "185", "201", "204", "199","39","116","205","208","163","-3","207","165","187","275"]
+
+country_dict = {"code":country_codes,"country":customer_countries, "average score":avg_score}
+
+avg_score_by_country=pd.DataFrame(country_dict)
+
+world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
+
+world.columns=['pop_est', 'continent', 'country', 'code', 'gdp_md_est', 'geometry']
+
+merged_df = pd.merge(world, avg_score_by_country, on=["code", "country"])
+print(merged_df.info())
+
+merged_df.plot(column="average score",  cmap = "BuGn", edgecolor = 'black', legend=True)
+plt.xticks([])
+plt.yticks([])
+plt.title("Average Customer Score by Country")
 plt.show()
