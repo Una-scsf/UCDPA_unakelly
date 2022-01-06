@@ -42,13 +42,11 @@ print(unq_with_hot_prospects["Score"].agg([np.median, np.mean, np.max, np.min]))
 score_by_campaign = unq_with_hot_prospects.groupby("Campaign")["Score"].agg([np.median, np.mean, np.max, np.min])
 print(score_by_campaign)
 
-
-
 fig, ax = plt.subplots()
-ax.hist(unq_with_hot_prospects["Lifecycle Stage"], bins=6, color="green", edgecolor="black")
-ax.set_xlabel("Lifecycle Stage")
-ax.set_ylabel("# of customers")
-ax.set_title("Lifecycle stage of customers")
+ax.hist(unq_with_hot_prospects["Score"], bins=[-100,0,100,200,300,400,500,600,700,800,900], orientation="horizontal", color="purple", edgecolor="black")
+ax.set_xlabel("# of customers")
+ax.set_ylabel("Score")
+ax.set_title("Engagement score of customers")
 plt.show()
 
 a_plus_grade = unq_with_hot_prospects.loc[unq_with_hot_prospects["Grade"] == "A+"].count()[0]
@@ -71,8 +69,8 @@ plt.title("Grade of customers")
 plt.show()
 
 fig, ax = plt.subplots()
-ax.hist(unq_with_hot_prospects["Score"], bins=[100,200,300,400,500,600,700,800,900], orientation="horizontal", color="purple", edgecolor="black")
-ax.set_xlabel("# of customers")
-ax.set_ylabel("Score")
-ax.set_title("Engagement score of customers")
+ax.hist(unq_with_hot_prospects["Lifecycle Stage"], bins=6, color="green", edgecolor="black")
+ax.set_xlabel("Lifecycle Stage")
+ax.set_ylabel("# of customers")
+ax.set_title("Lifecycle stage of customers")
 plt.show()
